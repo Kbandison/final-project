@@ -1,0 +1,19 @@
+#nav-items {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: aqua;
+  padding-left: 15px;
+  padding-right: 15px;
+  /* width: 100%; */
+}
+
+button {
+  background-color: black;
+  color: white;
+  height: 20px;
+}
+
+img {
+  width: 50px;
+}
