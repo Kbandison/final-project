@@ -1,19 +1,258 @@
-#nav-items {
+* {
+  border: 0;
+  outline: 0;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #003049;
+  display: flex;
+  font-family: "Poppins", sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  transition: 500ms ease-in-out;
+}
+
+.nav-bar {
+  background-color: #780000;
+  /* display: flex;
+  flex-direction: column; */
+  height: 200vh;
+  width: 15vw;
+  border-radius: 15px;
+  margin: 0.3vw 0.5vh;
+  position: relative;
+  display: none;
+  border: 5px solid white;
+}
+
+.nav-bar ul {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: baseline; */
+  align-items: center;
+}
+
+.nav-bar nav li {
+  list-style-type: none;
+  /* display: flex; */
+}
+
+.bug-page {
+  border: 5px solid transparent;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.7);
+  border-radius: 15px;
+  background-color: #669bbc;
+  height: 76.5vh;
+  padding-top: 10px;
+}
+
+.text {
+  width: 14vw;
+  height: 2vw;
+  padding-left: 20px;
+  margin: 10px;
+  border-radius: 10px;
+  font-family: "Poppins", sans-serif;
+  font-size: large;
+}
+
+.bug-btns {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.bug-btns input,
+.popup-confirm input,
+.bug-list-btn {
+  border-radius: 10px;
+  width: 7vw;
+  height: 4vh;
+  background-color: white;
+  font-family: "Poppins", sans-serif;
+  font-size: large;
+}
+
+.single {
+  width: 29vw;
+}
+
+.bug-options {
+  margin: 10px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.bug-options .dropdown {
+  width: 14.4vw;
+  height: 3.5vh;
+  border-radius: 10px;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-size: medium;
+  margin: 10px 0 10px 0;
+  cursor: pointer;
+}
+
+.bug-description {
+  height: 23vh;
+  overflow: hidden;
+  resize: none;
+  padding-top: 15px;
+  font-family: "Poppins", sans-serif;
+  font-size: large;
+}
+
+.name {
+  display: flex;
+}
+
+.text-label,
+.info label {
+  margin: 0.7vw;
+}
+
+.bug-options label {
+  margin: 0.3vw;
+  margin-bottom: 25px;
+}
+
+.bug-options label,
+.text-label,
+.info label {
+  /* border: 2px solid white; */
+  font-size: 25px;
+  font-weight: 400;
+}
+
+.text:focus,
+select:focus,
+textarea:focus {
+  border: 5px solid #c1121f;
+  transition: 100ms ease;
+}
+
+.bug-btns input:hover,
+.popup-confirm input:hover,
+.bug-list-btn:hover {
+  background-color: #c1121f;
+  transition: 200ms ease;
+  cursor: pointer;
+}
+
+.popup-confirm input {
+  text-align: center;
+}
+
+.popup-page {
+  background-color: rgba(0, 0, 0, 0.9);
+  border: 3px solid blue;
+  z-index: 1;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+.popup-confirm {
+  text-align: center;
+  border: 5px solid transparent;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px 0 rgba(193, 18, 31, 0.4);
+  padding: 2vw;
+  width: 35%;
+  position: relative;
+  top: 35%;
+  left: 33%;
+  background-color: #003049;
+  color: white;
+  font-size: 25px;
+}
+
+.popup-confirm p {
+  padding: 2vh 1vw 5vh 1vw;
+}
+
+.bug-table {
+  margin: 250vh 0 60vh 0;
+  border: 5px solid transparent;
+  color: white;
+  width: 80vw;
+  /* position: absolute; */
+
+  /* display: none; */
+}
+
+table,
+th,
+td {
+  border-bottom: 1px solid black;
+}
+
+th {
+  padding: 8px 20px 8px 5px;
+  text-align: left;
+}
+
+table {
+  width: 100%;
+  border-radius: 15px;
+  outline: 0;
+  background-color: #669bbc;
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.7);
+}
+
+a {
+  text-decoration: none;
+  text-align: center;
+  color: black;
+  padding: 0;
+  line-height: 3;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.tbl-header {
+  /* background-color: #669bbc; */
+  color: white;
+  margin: 30px;
+  font-size: 1.3em;
+}
+
+.bug-table header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: aqua;
-  padding-left: 15px;
-  padding-right: 15px;
-  /* width: 100%; */
+  margin: 1vw;
 }
 
-button {
-  background-color: black;
+.bug-table header h2 {
+  font-size: 40px;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+footer {
+  /* position: absolute; */
   color: white;
-  height: 20px;
 }
 
-img {
-  width: 50px;
+.list-nav {
+  display: flex;
+  gap: 4px;
 }
