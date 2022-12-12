@@ -25,6 +25,98 @@
     </div>
 
     <div class="container page-contents">
+      <div class="bug-page" id="bug-form">
+        <form class="bug-form">
+          <div class="name">
+            <div class="first">
+              <label class="text-label">First Name</label>
+              <br />
+              <input
+                type="text"
+                placeholder="Your First Name"
+                class="first-name text check"
+              />
+            </div>
+            <div class="last">
+              <label class="text-label">Last Name</label>
+              <br />
+              <input
+                type="text"
+                placeholder="Your Last Name"
+                class="last-name text check"
+              />
+            </div>
+          </div>
+          <br />
+          <label class="text-label">E-Mail</label>
+          <br />
+          <input
+            type="email"
+            placeholder="Your E-mail"
+            class="email text single check"
+          />
+          <br />
+          <br />
+          <div class="bug-options">
+            <div class="priority">
+              <label>Priority Level</label>
+              <br />
+              <select class="priority-level dropdown">
+                <option value="Priority Level">Priority Level</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+              </select>
+            </div>
+            <div class="type">
+              <label>Bug Type</label>
+              <br />
+              <select class="bug-type dropdown">
+                <option value="Bug Type">Bug Type</option>
+                <option value="Hardlock">Hardlock</option>
+                <option value="Softlock">Softlock</option>
+                <option value="Text-Error">Text-Error</option>
+                <option value="Audio">Audio</option>
+                <option value="Syntax">Syntax</option>
+                <option value="Logic">Logic</option>
+              </select>
+            </div>
+          </div>
+          <br />
+          <div class="info">
+            <div class="bug-name">
+              <label>Bug Name</label>
+              <br />
+              <input
+                type="text"
+                placeholder="Name of The Bug"
+                class="user-bug-name text single check"
+              />
+            </div>
+            <br />
+            <div class="area">
+              <label>Bug Information</label>
+              <br />
+              <textarea
+                placeholder="What's the Bug's Description?"
+                class="bug-description text single check"
+              ></textarea>
+            </div>
+          </div>
+          <div class="bug-btns">
+            <input type="reset" class="bug-reset" value="Reset" />
+            <input type="submit" class="bug-submit" />
+            <button
+              type="button"
+              class="bug-list-btn show-my-list"
+              style="display: none"
+            >
+              <a href="#bug-table">Show Bugs</a>
+            </button>
+          </div>
+        </form>
+      </div>
       <div class="popup-page">
         <div class="popup-confirm">
           <h2>Thank You!</h2>
@@ -175,7 +267,7 @@
       </div>
 
       <footer>
-        <p>&copy; 2022, Bugger-Off!</p>
+        <p>&copy; 2022, Bugger-Off</p>
       </footer>
     </div>
     <script src="js/main.js"></script>
