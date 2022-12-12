@@ -1,6 +1,7 @@
 "use strict";
 
-// Query Selectors
+/*******************QUERY SELECTORS*********************/
+
 //Form Fields
 let bugForm = document.querySelector(".bug-form");
 let firstName = document.querySelector(".first-name");
@@ -41,7 +42,7 @@ let editBugName = document.querySelector(".edit-bug-name");
 let editBugDescription = document.querySelector(".edit-bug-description");
 let editSubmit = document.querySelector(".edit-submit");
 
-let number;
+/****************HELPER CODE********************/
 
 let i = 1;
 let errorStatusArr = ["Open", "To-Do", "In Progress", "Closed"];
@@ -135,8 +136,37 @@ function BugInfo(
 
 /**************************CODE FOR CARD/TABLE******************************/
 
+////SUBMIT BUTTON THAT ADDS THE NEWLY CREATED OBJECT TO LOCAL STORAGE
+submit.addEventListener("click", () => {
+  showList.style.display = "block";
+  submitPage.style.display = "block";
+  submitConfirm.style.display = "block";
+
+  ////OBJECT CREATION FROM CONSTRUCTOR
+  new BugInfo(
+    customers.length + 1,
+    firstName.value,
+    lastName.value,
+    `${firstName.value} ${lastName.value}`,
+    userEmail.value,
+    bugType.value,
+    priorityLevel.value,
+    bugName.value,
+    bugDescription.value,
+    today,
+    futureDay,
+    errorStatusArr[Math.floor(Math.random() * errorStatusArr.length)],
+    assigneeArr[Math.floor(Math.random() * assigneeArr.length)]
+  );
+
+  ////SETS OBJECT IN LOCAL STORAGE
+  let stringifiedCustomers = JSON.stringify(customers);
+  localStorage.setItem("bugs", stringifiedCustomers);
+});
+
 ////FUNCTION TO CHECK IF THERE'S ANYTHING IN LOCAL STORAGE, AND CREATES A TABLE ROW WITH IT
 if (retrievedCustomers) {
+  ////LOOPS THROUGH EVERYTHING LOCAL STORAGE AND REDECLARES IT TO BE USED TO MAKE THE TABLE
   parsedCustomers.forEach((e) => {
     new BugInfo(
       e.id,
@@ -156,7 +186,7 @@ if (retrievedCustomers) {
 
     ////Table Creation
     let row = document.createElement("tr");
-    number = document.createElement("th");
+    let number = document.createElement("th");
     let rowBugName = document.createElement("td");
     let rowBugType = document.createElement("td");
     let rowUserName = document.createElement("td");
@@ -165,21 +195,21 @@ if (retrievedCustomers) {
     let rowStatus = document.createElement("td");
     let rowAssignee = document.createElement("td");
     let rowPriorityLevel = document.createElement("td");
-    let rowDeleteCell = document.createElement("td");
-    let rowDeleteButtons = document.createElement("div");
-    let rowEdit = document.createElement("button");
-    let rowDelete = document.createElement("button");
+    let rowViewCell = document.createElement("td");
+    let rowButtons = document.createElement("div");
+    let rowView = document.createElement("button");
+    // let rowDelete = document.createElement("button");
 
     number.innerText = e.id;
     row.className = "rows";
-    rowEdit.className = "row-btn";
-    rowDelete.className = "row-btn";
-    rowDeleteButtons.className = "cell";
-    rowDeleteCell.className = "cell-style";
+    rowView.className = "row-btn";
+    // rowDelete.className = "row-btn";
+    rowButtons.className = "cell";
+    rowViewCell.className = "cell-style";
     rowBugName.innerText = e.bugName;
-    rowEdit.textContent = "View";
+    rowView.textContent = "View";
     deleteHeader.style.display = "none";
-    rowDeleteCell.style.display = "none";
+    rowViewCell.style.display = "none";
 
     rowBugType.innerText = e.bugType;
     rowUserName.innerText = e.userName;
@@ -198,10 +228,10 @@ if (retrievedCustomers) {
     row.appendChild(rowdateComplete);
     row.appendChild(rowStatus);
     row.appendChild(rowAssignee);
-    row.appendChild(rowDeleteCell);
-    rowDeleteCell.appendChild(rowDeleteButtons);
-    rowDeleteButtons.appendChild(rowEdit);
-    // rowDeleteButtons.appendChild(rowDelete);
+    row.appendChild(rowViewCell);
+    rowViewCell.appendChild(rowButtons);
+    rowButtons.appendChild(rowView);
+    // rowButtons.appendChild(rowDelete);
     listRow.appendChild(row);
 
     rowStatus.style.borderRadius = "10px";
@@ -222,25 +252,28 @@ if (retrievedCustomers) {
       rowStatus.style.backgroundColor = "orange";
     }
 
-    ////SHOW BUGS FROM POPUP
+    ////SHOW TABLE FROM POPUP
     submitShowList.addEventListener("click", () => {
       submitPage.style.display = "none";
       submitConfirm.style.display = "none";
       location.reload();
     });
 
-    ////DELETE BUTTON
+    ////DELETE BUTTON(NOT BEING USED BUT KEPT IT JUST IN CASE)
     deleteBug.addEventListener("click", () => {
       deleteBug.style.display = "none";
       doneBug.style.display = "block";
       deleteHeader.style.display = "block";
-      rowDeleteCell.style.display = "block";
+      rowViewCell.style.display = "block";
 
-      rowEdit.addEventListener("click", () => {
+      ////Reveals the Modal
+      rowView.addEventListener("click", () => {
         submitPage.style.display = "block";
         editForm.style.display = "block";
 
-        ////MAKES THE DEFAULT SELECTED TO BE THE VALUE OF PRIORITY
+        /**************CODE TO POPULATE THE MODAL*******************/
+
+        ////MAKES THE VALUE OF PRIORITY THE DEFAULT SELECTED
         let priorityList = document.querySelectorAll(
           ".edit-priority-level option"
         );
@@ -251,7 +284,7 @@ if (retrievedCustomers) {
           }
         }
 
-        ////MAKES THE DEFAULT SELECTED TO BE THE VALUE OF BUG TYPE
+        ////MAKES THE VALUE OF BUG TYPE THE DEFAULT SELECTED
         let typeList = document.querySelectorAll(".edit-bug-type option");
 
         for (let i = 0; i < typeList.length; i++) {
@@ -265,47 +298,23 @@ if (retrievedCustomers) {
         editEmail.value = e.userEmail;
         editBugName.value = e.bugName;
         editBugDescription.value = e.bugDescription;
-        // console.log(editType);
+        /************************************************************/
 
-        editSubmit.addEventListener("click", () => {
+        ////MAKES THE MODAL HIDDEN AGAIN
+        editSubmit.addEventListener("click", (e) => {
+          e.preventDefault();
           submitPage.style.display = "none";
           editForm.style.display = "none";
         });
       });
     });
 
+    ////SWITCHES THE DONE BUTTON BACK TO THE VIEW BUTTON
     doneBug.addEventListener("click", () => {
       doneBug.style.display = "none";
       deleteBug.style.display = "block";
       deleteHeader.style.display = "none";
-      rowDeleteCell.style.display = "none";
+      rowViewCell.style.display = "none";
     });
   });
 }
-
-////SUBMIT
-submit.addEventListener("click", () => {
-  showList.style.display = "block";
-  submitPage.style.display = "block";
-  submitConfirm.style.display = "block";
-
-  new BugInfo(
-    customers.length + 1,
-    firstName.value,
-    lastName.value,
-    `${firstName.value} ${lastName.value}`,
-    userEmail.value,
-    bugType.value,
-    priorityLevel.value,
-    bugName.value,
-    bugDescription.value,
-    today,
-    futureDay,
-    errorStatusArr[Math.floor(Math.random() * errorStatusArr.length)],
-    assigneeArr[Math.floor(Math.random() * assigneeArr.length)]
-  );
-
-  let stringifiedCustomers = JSON.stringify(customers);
-  localStorage.setItem("bugs", stringifiedCustomers);
-  console.log(customers);
-});
